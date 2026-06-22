@@ -391,8 +391,8 @@ serialized through the shared contract package, with dev seed data to read.
 
 ### Phase 1: Project scaffold & local dev environment
 #### Automated
-- [ ] 1.1 `pnpm install` and `pnpm -C backend build` succeed
-- [ ] 1.2 `GET /health` returns 200
+- [x] 1.1 `pnpm install` and `pnpm -C backend build` succeed
+- [x] 1.2 `GET /health` returns 200
 - [ ] 1.3 CI workflow runs lint + tests against a Postgres service and passes
 #### Manual
 - [ ] 1.4 `docker compose up` + starting the API serves `GET /health` locally

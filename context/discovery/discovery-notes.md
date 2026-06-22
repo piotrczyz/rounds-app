@@ -251,6 +251,20 @@ not a rewrite. **Trade-off:** the first increment does not test the togetherness
 thesis, but it validates the core dopamine loop cheaply and de-risks the
 expensive multi-user sync work. Status: accepted.
 
+### ADR-0003: Node.js/TypeScript backend (NestJS + Prisma), Supabase for identity
+The backend was originally pinned to Python 3.12 / FastAPI. It is now Node.js /
+TypeScript on NestJS + Prisma over PostgreSQL, with identity delegated to Supabase
+Auth (managed Apple/Google sign-in) and the backend verifying the Supabase-issued
+JWT behind a swappable verifier. **Why:** Rounds is offline-first, so client and
+server must agree exactly on each synced row's shape, version, and tombstone
+semantics; a TypeScript backend lets that sync contract live in one shared package
+both the API and the React Native app import. Delegating sign-in to Supabase
+retired the main argument for Python (mature two-provider token validation), and
+pnpm/Vitest are already the house JS defaults. **Trade-off:** introduces Supabase
+as an identity dependency (mitigated by isolating it behind a verifier interface)
+and accepts Node's slightly less batteries-included relational tooling versus
+FastAPI. Status: accepted.
+
 ## Open Questions
 - Task "shrinking" on second snooze (Fogg make-it-easy) — deferred from MVP; revisit once the core loop is validated. Needs a per-Round notion of a "smaller version", which not all Rounds have.
 - Mileage- or season-based triggers (e.g. oil by km, pool only in summer) — out of scope; approximated by intervals for now. Revisit if interval approximation proves too coarse.

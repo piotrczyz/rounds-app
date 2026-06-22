@@ -1,0 +1,23 @@
+# Local development dependencies for the Rounds backend.
+# Brings up the PostgreSQL the API connects to via DATABASE_URL.
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: rounds-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: rounds
+      POSTGRES_PASSWORD: rounds
+      POSTGRES_DB: rounds
+    ports:
+      - '5432:5432'
+    volumes:
+      - rounds_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U rounds -d rounds']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  rounds_pgdata:

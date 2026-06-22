@@ -1,0 +1,18 @@
+{
+  "name": "rounds",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Rounds — tracks recurring household and shared commitments and makes completing them feel good.",
+  "packageManager": "pnpm@10.22.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "pnpm -r build",
+    "lint": "pnpm -r lint",
+    "test": "pnpm -r test"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": ["@prisma/client", "@prisma/engines", "@swc/core", "esbuild", "prisma"]
+  }
+}

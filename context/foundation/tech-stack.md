@@ -9,8 +9,8 @@ source: picked-from-palette
 # Rounds — Tech Stack
 
 ## Languages & Runtimes
-- TypeScript (React Native / Expo)
-- Python 3.12 (backend API)
+- TypeScript (React Native / Expo — mobile; Node.js — backend)
+- Node.js 22 (backend API runtime)
 
 ## Mobile
 - Framework: React Native + Expo (extends the React palette entry; cross-platform iOS + Android)
@@ -18,7 +18,10 @@ source: picked-from-palette
 - Styling: React Native StyleSheet / NativeWind (Tailwind-compatible utility classes for React Native)
 
 ## Backend
-- Python FastAPI — REST API for auth, cloud sync, and push-notification dispatch
+- Node.js / TypeScript on **NestJS** — REST API for auth, cloud sync, and push-notification dispatch
+- ORM / migrations: **Prisma** (type-safe data access, first-class migrations)
+- Auth: **Supabase Auth** (managed Apple/Google social sign-in); the backend verifies the Supabase-issued JWT behind a swappable verifier and owns all Rounds data in its own PostgreSQL
+  > Deviation note: the backend was originally pinned to Python 3.12 / FastAPI. Switched to Node.js/TypeScript so the API shares one language and a single sync-contract package with the React Native app, and because delegating sign-in to Supabase retired the auth-validation rationale for Python. See ADR-0003.
 
 ## Data & Storage
 - Database: PostgreSQL (house default)
